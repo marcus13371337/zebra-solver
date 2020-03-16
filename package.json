@@ -1,0 +1,23 @@
+{
+  "name": "zebra-solver",
+  "version": "1.0.0",
+  "description": "The most declarative zebra puzzle framework",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcus13371337/zebra-solver.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcus13371337/zebra-solver/issues"
+  },
+  "homepage": "https://github.com/marcus13371337/zebra-solver#readme"
+}
