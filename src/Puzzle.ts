@@ -1,7 +1,7 @@
 import { Constraint } from "./constraints/Constraint";
 import { Property } from "./Property";
 import { containsSameValue } from "./utils/containsSameValue";
-import { PropertyGrid, createPropertyGrid } from "./PropertyGrid";
+import { PropertyGrid, create as createPropertyGrid } from "./PropertyGrid";
 
 const validateProperties = (properties: Property<any>[]) => {
   if (!properties.length) {
@@ -91,7 +91,7 @@ interface ZebraPuzzle<T> {
   solve: () => T[][];
 }
 
-export const createPuzzle = <T extends {}>(
+export const create = <T extends {}>(
   properties: Property<T>[],
   constraints: Constraint[]
 ): ZebraPuzzle<T> => {

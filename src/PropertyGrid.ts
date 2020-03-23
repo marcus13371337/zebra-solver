@@ -10,9 +10,7 @@ export interface PropertyGrid<T> {
   getGrid: () => (T | null)[][];
 }
 
-export const createPropertyGrid = <T>(
-  properties: Property<T>[]
-): PropertyGrid<T> => {
+export const create = <T>(properties: Property<T>[]): PropertyGrid<T> => {
   const grid: (T | null)[][] = [];
 
   properties.forEach(property => {

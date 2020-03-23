@@ -1,4 +1,4 @@
-import { property, puzzle, place } from "../../src";
+import { property, puzzle, place } from "../src";
 
 describe("basic1", () => {
   it("can solve the puzzle", () => {

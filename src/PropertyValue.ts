@@ -5,7 +5,7 @@ export interface PropertyValue<T> {
   getValue: () => T;
 }
 
-export const createPropertyValue = <T>(
+export const create = <T>(
   property: Property<T>,
   value: T
 ): PropertyValue<T> => {

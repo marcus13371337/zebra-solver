@@ -2,6 +2,7 @@ import { Constraint } from "./Constraint";
 import { PropertyValue } from "../PropertyValue";
 import { PropertyGrid } from "../PropertyGrid";
 import { create as createOrConstraint } from "./OrConstraint";
+import { removeDuplicates } from "../utils/removeDuplicates";
 
 export interface Creators {
   atDistance: (value: PropertyValue<any>, distance: number) => Constraint;
@@ -32,7 +33,8 @@ const create = (
 
   return {
     isBroken,
-    getProperties: () => [valueA.getProperty(), valueB.getProperty()]
+    getProperties: () =>
+      removeDuplicates([valueA.getProperty(), valueB.getProperty()])
   };
 };
 
@@ -40,12 +42,13 @@ export const createCreators = (value: PropertyValue<any>): Creators => {
   const atDistance = (valueB: PropertyValue<any>, distance: number) =>
     create(value, valueB, distance);
 
-  const createAtDistance = (distance: number) => (valueB: PropertyValue<any>) =>
-    atDistance(valueB, distance);
+  const atDistanceCreator = (distance: number) => (
+    valueB: PropertyValue<any>
+  ) => atDistance(valueB, distance);
 
-  const sameAs = createAtDistance(0);
-  const justBefore = createAtDistance(-1);
-  const justAfter = createAtDistance(1);
+  const sameAs = atDistanceCreator(0);
+  const justBefore = atDistanceCreator(-1);
+  const justAfter = atDistanceCreator(1);
 
   const beside = (valueB: PropertyValue<any>) =>
     createOrConstraint([justBefore(valueB), justAfter(valueB)]);

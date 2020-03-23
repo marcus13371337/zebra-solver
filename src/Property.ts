@@ -1,4 +1,4 @@
-import { createPropertyValue, PropertyValue } from "./PropertyValue";
+import { create as createPropertyValue, PropertyValue } from "./PropertyValue";
 
 export interface Property<T> {
   getId: () => string;
@@ -9,7 +9,7 @@ export interface Property<T> {
   smallest: () => PropertyValue<T>;
 }
 
-export const createProperty = <T>(id: string, values: T[]): Property<T> => {
+export const create = <T>(id: string, values: T[]): Property<T> => {
   const sortedValues = values.concat().sort();
 
   const get = (value: T) => {
