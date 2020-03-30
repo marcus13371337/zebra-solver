@@ -96,7 +96,107 @@ describe("OrConstraint", () => {
       const constraint = creators.atDistance(testValues.get("g"), 0);
       expect(constraint.isBroken(grid)).toBe(false);
     });
+  });
 
+  describe("sameAs", () => {
+    it("is broken if not on same position", () => {
+      const constraint = creators.sameAs(testValues.get("a"));
+
+      expect(constraint.isBroken(grid)).toBe(true);
+    });
+
+    it("is not broken if on same position", () => {
+      const constraint = creators.sameAs(testValues.get("d"));
+
+      expect(constraint.isBroken(grid)).toBe(false);
+    });
+
+    it("is not broken if value doesnt have position", () => {
+      const grid = mockPropertyGrid(
+        [["a", "b", "c", null, "e", "f", "g"]],
+        [testValues]
+      );
+
+      const constraint = creators.sameAs(testValues.get("g"));
+      expect(constraint.isBroken(grid)).toBe(false);
+    });
+  });
+
+  describe("justBefore", () => {
+    it("is broken if not just before position", () => {
+      const constraint = creators.justBefore(testValues.get("a"));
+
+      expect(constraint.isBroken(grid)).toBe(true);
+    });
+
+    it("is not broken if just before", () => {
+      const constraint = creators.justBefore(testValues.get("e"));
+
+      expect(constraint.isBroken(grid)).toBe(false);
+    });
+
+    it("is not broken if value doesnt have position", () => {
+      const grid = mockPropertyGrid(
+        [["a", "b", "c", null, "e", "f", "g"]],
+        [testValues]
+      );
+
+      const constraint = creators.justBefore(testValues.get("g"));
+      expect(constraint.isBroken(grid)).toBe(false);
+    });
+  });
+
+  describe("justAfter", () => {
+    it("is broken if not just after position", () => {
+      const constraint = creators.justAfter(testValues.get("b"));
+
+      expect(constraint.isBroken(grid)).toBe(true);
+    });
+
+    it("is not broken if just after", () => {
+      const constraint = creators.justAfter(testValues.get("c"));
+
+      expect(constraint.isBroken(grid)).toBe(false);
+    });
+
+    it("is not broken if value doesnt have position", () => {
+      const grid = mockPropertyGrid(
+        [["a", "b", "c", null, "e", "f", "g"]],
+        [testValues]
+      );
+
+      const constraint = creators.justBefore(testValues.get("g"));
+      expect(constraint.isBroken(grid)).toBe(false);
+    });
+  });
+
+  describe("beside", () => {
+    it("is broken if not beside value", () => {
+      const constraint = creators.beside(testValues.get("b"));
+
+      expect(constraint.isBroken(grid)).toBe(true);
+    });
+
+    it("is not broken if beside position", () => {
+      const beforeConstraint = creators.beside(testValues.get("c"));
+      expect(beforeConstraint.isBroken(grid)).toBe(false);
+
+      const afterConstraint = creators.beside(testValues.get("e"));
+      expect(afterConstraint.isBroken(grid)).toBe(false);
+    });
+
+    it("is not broken if value doesnt have position", () => {
+      const grid = mockPropertyGrid(
+        [["a", "b", "c", null, "e", "f", "g"]],
+        [testValues]
+      );
+
+      const constraint = creators.justBefore(testValues.get("g"));
+      expect(constraint.isBroken(grid)).toBe(false);
+    });
+  });
+
+  describe("general", () => {
     it("returns both properties for getProperties", () => {
       const constraint = creators.atDistance(testValues.get("g"), 0);
 
