@@ -8,7 +8,7 @@ const validateProperties = (properties: Property<any>[]) => {
     throw new Error("Can't create problem without any properties");
   }
 
-  const propertyLengths = properties.map(property => property.getLength());
+  const propertyLengths = properties.map((property) => property.getLength());
 
   if (!containsSameValue(propertyLengths)) {
     throw new Error("Provided properties have different length");
@@ -19,10 +19,10 @@ const validateConstraints = (
   constraints: Constraint[],
   properties: Property<any>[]
 ) => {
-  constraints.forEach(constraint => {
+  constraints.forEach((constraint) => {
     const propertiesInConstraint = constraint.getProperties();
 
-    propertiesInConstraint.forEach(property => {
+    propertiesInConstraint.forEach((property) => {
       if (!properties.includes(property)) {
         throw new Error(
           "Some constraints refers to properties not included in the puzzle"
@@ -56,7 +56,7 @@ const solveGrid = <T>(
       const currentValue = grid.getCell(row, column);
       if (currentValue === null) {
         const possibleValues = values.filter(
-          value => !currentRow.includes(value)
+          (value) => !currentRow.includes(value)
         );
 
         for (
@@ -66,7 +66,7 @@ const solveGrid = <T>(
         ) {
           grid.setCell(row, column, possibleValues[valueIndex]);
 
-          if (constraints.every(constraint => !constraint.isBroken(grid))) {
+          if (constraints.every((constraint) => !constraint.isBroken(grid))) {
             const isSolved = solveGrid(grid, constraints, width);
 
             if (isSolved) {
@@ -83,7 +83,7 @@ const solveGrid = <T>(
 
   return (
     doesNotContainNull(grid.getGrid()) &&
-    constraints.every(constraint => !constraint.isBroken(grid))
+    constraints.every((constraint) => !constraint.isBroken(grid))
   );
 };
 
@@ -115,6 +115,6 @@ export const create = <T extends {}>(
   };
 
   return {
-    solve
+    solve,
   };
 };

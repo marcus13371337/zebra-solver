@@ -1,32 +1,30 @@
 import { property, puzzle, place } from "../src";
 
 describe("Movies Night", () => {
-  beforeEach(() => {});
-
   it("can solve the puzlle", () => {
     const shirts = property<string | number>("Shirt", [
       "black",
       "blue",
       "green",
-      "red"
+      "red",
     ]);
     const names = property<string | number>("Name", [
       "Daniel",
       "Joshua",
       "Nicholas",
-      "Ryan"
+      "Ryan",
     ]);
     const movies = property<string | number>("Movie", [
       "action",
       "comedy",
       "horror",
-      "thriller"
+      "thriller",
     ]);
     const snacks = property<string | number>("Snack", [
       "chips",
       "cookies",
       "crackers",
-      "popcorn"
+      "popcorn",
     ]);
     const ages = property<string | number>("Age", [11, 12, 13, 14]);
 
@@ -50,7 +48,7 @@ describe("Movies Night", () => {
           names.get("Joshua"),
           names.get("Daniel")
         ),
-        place(shirts.get("green")).first()
+        place(shirts.get("green")).first(),
       ]
     ).solve();
 
@@ -59,7 +57,7 @@ describe("Movies Night", () => {
       ["Joshua", "Ryan", "Nicholas", "Daniel"],
       ["horror", "comedy", "action", "thriller"],
       ["popcorn", "chips", "crackers", "cookies"],
-      [13, 12, 14, 11]
+      [13, 12, 14, 11],
     ]);
   });
 });
