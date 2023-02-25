@@ -46,18 +46,15 @@ export const createCreators = (value: PropertyValue<any>): Creators => {
     valueB: PropertyValue<any>
   ) => atDistance(valueB, distance);
 
-  const sameAs = atDistanceCreator(0);
   const justBefore = atDistanceCreator(-1);
   const justAfter = atDistanceCreator(1);
 
-  const beside = (valueB: PropertyValue<any>) =>
-    createOrConstraint([justBefore(valueB), justAfter(valueB)]);
-
   return {
     atDistance,
-    sameAs,
+    sameAs: atDistanceCreator(0),
     justBefore,
     justAfter,
-    beside
+    beside: (valueB: PropertyValue<any>) =>
+    createOrConstraint([justBefore(valueB), justAfter(valueB)])
   };
 };
